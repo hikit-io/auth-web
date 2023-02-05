@@ -34,7 +34,7 @@ const buildGithubUrl = (url: string): string => {
         <a-button type="primary" block>Login</a-button>
       </a-form-item>
       <a-divider></a-divider>
-      <a-button @click="toUrl(buildGithubUrl('https://oauth.hikit.io/login'))" size="middle" block>
+      <a-button @click="toUrl(buildGithubUrl(`https://auth.hikit.io/login?method=1&from=${from}`))" size="middle" block>
         <div style="display: flex; align-items: center; ">
           <GithubFilled></GithubFilled>
           <div style="width: 100%;">Sign in with Github</div>
