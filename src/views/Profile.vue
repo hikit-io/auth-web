@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+<span>Profile</span>
 </template>
 
 <style scoped>
