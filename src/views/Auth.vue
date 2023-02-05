@@ -8,8 +8,14 @@ const toUrl = (url: string) => {
   window.location.href = url
 }
 
-const buildGithubUrl = (url: string): string => {
-  return `https://github.com/login/oauth/authorize?client_id=7bf3cf55fcc4a2c315d0&scope=read:user&redirect_uri=${url}`
+const buildGithubUrl = (redirectUrl: string): string => {
+  return `https://github.com/login/oauth/authorize?client_id=7bf3cf55fcc4a2c315d0&scope=read:user&redirect_uri=${redirectUrl}`
+}
+const buildRedirectUrl = (url: string): string => {
+  if (from) {
+    return `${url}?method=1&from=${from.value}`
+  }
+  return `${url}?method=1`
 }
 
 </script>
@@ -34,7 +40,7 @@ const buildGithubUrl = (url: string): string => {
         <a-button type="primary" block>Login</a-button>
       </a-form-item>
       <a-divider></a-divider>
-      <a-button @click="toUrl(buildGithubUrl(`https://auth.hikit.io/login?method=1&from=${from}`))" size="middle" block>
+      <a-button @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))" size="middle" block>
         <div style="display: flex; align-items: center; ">
           <GithubFilled></GithubFilled>
           <div style="width: 100%;">Sign in with Github</div>
