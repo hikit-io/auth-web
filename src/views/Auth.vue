@@ -9,10 +9,11 @@ const toUrl = (url: string) => {
 }
 
 const buildGithubUrl = (redirectUrl: string): string => {
+  console.log(`[auth] redirectUrl: ${redirectUrl}`)
   return `https://github.com/login/oauth/authorize?client_id=7bf3cf55fcc4a2c315d0&scope=read:user&redirect_uri=${redirectUrl}`
 }
 const buildRedirectUrl = (url: string): string => {
-  if (from) {
+  if (from.value) {
     return `${url}?method=1&from=${from.value}`
   }
   return `${url}?method=1`
