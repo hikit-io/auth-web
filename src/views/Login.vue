@@ -10,7 +10,7 @@ const form = reactive({
   code: code.value,
 })
 
-axios.post("http://localhost:8080/login", form).then(value => {
+axios.post("https://api.hikit.io/auth/login", form).then(value => {
   if (from.value) {
     window.location.href = from.value as string
   }
