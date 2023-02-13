@@ -6,6 +6,9 @@ import wasm from 'vite-plugin-wasm'
 export default defineConfig({
     plugins: [vue(), wasm()],
     build: {
-        outDir: 'docs'
+        outDir: 'docs',
+    },
+    optimizeDeps: {
+        exclude: ['@hikit/auth-service']
     }
 })

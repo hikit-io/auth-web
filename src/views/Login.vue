@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import {useRouteQuery} from "@vueuse/router";
 import {reactive} from "vue";
-import axios from "axios";
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import {Client, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 
 const code = useRouteQuery('code', '')
