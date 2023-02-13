@@ -9,6 +9,6 @@ export default defineConfig({
         outDir: 'docs',
     },
     optimizeDeps: {
-        exclude: ['@hikit/auth-service']
+        exclude: ['@hikit/auth-service/auth_service_bg.wasm']
     }
 })
