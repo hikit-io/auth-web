@@ -1,8 +1,14 @@
 <script lang="ts" setup>
 import {GithubFilled} from "@ant-design/icons-vue";
 import {useRouteQuery} from "@vueuse/router";
+import {reactive} from "vue";
 
 const from = useRouteQuery('from', '')
+
+const form = reactive({
+  email: '',
+  password: ''
+})
 
 const toUrl = (url: string) => {
   window.location.href = url
@@ -19,6 +25,16 @@ const buildRedirectUrl = (url: string): string => {
   return `${url}?method=1`
 }
 
+const onLogin = (val:any) => {
+  // if (!form.email){
+  //
+  // }
+  // if (!form.password){
+  //
+  // }
+  console.log(val)
+}
+
 </script>
 
 <template>
@@ -30,15 +46,15 @@ const buildRedirectUrl = (url: string): string => {
       </a-typography-text>
       <a-button style="padding: 0;" type="link" @click="toUrl(from)">{{ from }}</a-button>
     </div>
-    <a-form>
-      <a-form-item>
-        <a-input placeholder="Email"></a-input>
+    <a-form :model="form" @finish="onLogin">
+      <a-form-item name="email" :required="true">
+        <a-input v-model:value="form.email" placeholder="Email" addon-after="@hikit.io"></a-input>
+      </a-form-item>
+      <a-form-item name="password" :required="true">
+        <a-input-password v-model:value="form.password" placeholder="Password"></a-input-password>
       </a-form-item>
       <a-form-item>
-        <a-input placeholder="Password"></a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" block>Login</a-button>
+        <a-button html-type="submit" type="primary" block>Login</a-button>
       </a-form-item>
       <a-divider></a-divider>
       <a-button @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))" size="middle" block>

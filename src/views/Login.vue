@@ -3,9 +3,12 @@ import {useRouteQuery} from "@vueuse/router";
 import {reactive} from "vue";
 import axios from "axios";
 import {useRoute, useRouter} from "vue-router";
+import {Client, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 
-const code = useRouteQuery('code')
+const code = useRouteQuery('code', '')
 const from = useRouteQuery('from')
+const method = useRouteQuery('method')
+
 
 const form = reactive({
   code: code.value,
@@ -13,16 +16,21 @@ const form = reactive({
 
 const {push} = useRouter()
 
-axios.post("https://api.hikit.io/auth/login", form).then(value => {
-  if (from.value) {
-    window.location.href = from.value as string
-  } else {
-    push({path:'/profile'})
-  }
-}).catch(reason => {
+let cli = new Client("https://api.hikit.io", "123213");
 
-})
-
+if (method.value === "1") {
+  cli.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
+    console.log(value)
+  }).catch(reason => {
+    console.log(reason)
+  })
+} else {
+  cli.login(new LoginParams(new EmailLogin("", ""))).then(value => {
+    console.log(value)
+  }).catch(reason => {
+    console.log(reason)
+  })
+}
 
 </script>
 

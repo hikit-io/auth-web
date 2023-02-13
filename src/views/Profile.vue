@@ -4,7 +4,7 @@
 
 <template>
 <span>Profile</span>
-</template>
+</template>›
 
 <style scoped>
 
