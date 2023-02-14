@@ -9,7 +9,7 @@ const useServiceProvide = async (endpoint: string) => {
     const cookies = useCookies()
     const cookie = cookies.get('HIKIT')
     console.log(cookie)
-    const cli = new Client(endpoint, cookie.value)
+    const cli = new Client(endpoint, cookie ?? '')
     return cli
 }
 
