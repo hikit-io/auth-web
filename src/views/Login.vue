@@ -16,20 +16,24 @@ const form = reactive({
 })
 
 const routeTo = (firstLogin: boolean, from: string) => {
-  if (from) {
-    window.location.href = from
-  }
-  if (firstLogin) {
-    push({
-      path: 'profile'
-    })
-  }
+  push({
+    path: '/profile'
+  })
+  // if (from) {
+  // window.location.href = from
+  // }
+  // if (firstLogin) {
+  //   push({
+  //     path: '/profile'
+  //   })
+  // }
 }
 
 const client = useService()
 if (method.value === "1") {
   client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
     console.log(value)
+    routeTo(false, "")
   }).catch(reason => {
     console.log(reason)
   })

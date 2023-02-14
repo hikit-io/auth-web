@@ -1,1 +1,0 @@
-import{d as n,a as r,w as e,b as t,o as s,c,f as _,t as p,m as l}from"./index.3a0eeb83.js";const f=n({__name:"Profile",setup(i){return l(),(d,m)=>{const a=t("a-typography-title"),o=t("a-card");return s(),r(o,null,{default:e(()=>[c(a,null,{default:e(()=>[_("Hi, "+p(),1)]),_:1})]),_:1})}}});export{f as default};
