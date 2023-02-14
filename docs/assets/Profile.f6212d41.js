@@ -1,0 +1,1 @@
+import{_ as r}from"./plugin-vueexport-helper.2444895f.js";import{a as t,o as c,b as n,w as e,c as s,f as _,t as l}from"./index.f7301851.js";const p={};function f(i,d){const o=t("a-typography-title"),a=t("a-card");return c(),n(a,null,{default:e(()=>[s(o,null,{default:e(()=>[_("Hi, "+l(),1)]),_:1})]),_:1})}const x=r(p,[["render",f]]);export{x as default};
