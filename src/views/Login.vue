@@ -4,6 +4,8 @@ import {reactive} from "vue";
 import {useRouter} from "vue-router";
 import init, {Client, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useService} from "../compose/useService";
+import {useCookies} from "@vueuse/integrations/useCookies";
+import Cookies from "universal-cookie";
 
 const {push} = useRouter()
 
@@ -29,11 +31,17 @@ const routeTo = (firstLogin: boolean, from: string) => {
   // }
 }
 
+const cookies = useCookies()
+
 const client = useService()
 if (method.value === "1") {
   client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
     console.log(value)
     routeTo(false, "")
+
+    cookies.set('HIKIT', value.access_token, {
+      domain: '.hikit.io'
+    })
   }).catch(reason => {
     console.log(reason)
   })

@@ -1,11 +1,15 @@
 import init, {Client} from "@hikit/auth-service";
 import {inject, provide} from "vue";
+import {useCookies} from "@vueuse/integrations/useCookies";
 
 const Service = Symbol()
 
 const useServiceProvide = async (endpoint: string) => {
     await init()
-    const cli = new Client(endpoint, "")
+    const cookies = useCookies()
+    const cookie = cookies.get('HIKIT')
+    console.log(cookie)
+    const cli = new Client(endpoint, cookie.value)
     return cli
 }
 
