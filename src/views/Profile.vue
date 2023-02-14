@@ -3,7 +3,9 @@
 </script>
 
 <template>
-<span>Profile</span>
+<a-card>
+  <a-typography-title>Hi, {{}}</a-typography-title>
+</a-card>
 </template>›
 
 <style scoped>
