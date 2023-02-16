@@ -16,7 +16,7 @@ client.profile().then(value => {
 
 <template>
   <a-card>
-    <a-typography-title>Hi, {{ profile?.id}}</a-typography-title>
+    <a-typography-title>Hi, {{ profile?.account}}</a-typography-title>
   </a-card>
 </template>›
 
