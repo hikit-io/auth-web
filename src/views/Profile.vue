@@ -16,8 +16,8 @@ client.profile().then(value => {
 
 <template>
   <div class="card">
-    <div style="min-width: 50%;">
-      <h1>Hi, Nekilc </h1>
+    <div>
+      <h1>Hi, {{ profile?.account}} </h1>
       <var-list>
         <var-cell title="Name" description="Nekilc"></var-cell>
         <var-cell title="Email" description="nieaowei@hikit.io" ></var-cell>
