@@ -29,7 +29,11 @@ client.profile().then(value => {
         <var-cell title="Name" description="Nekilc"></var-cell>
         <var-cell title="Email" description="nieaowei@hikit.io"></var-cell>
         <var-cell title="Account" description="nieaowei"></var-cell>
-        <var-cell title="Github" description="nieaowei"></var-cell>
+        <var-cell title="Github" description="nieaowei">
+          <template #icon>
+            <var-icon name="github"></var-icon>
+          </template>
+        </var-cell>
       </var-list>
       <var-space>
         <var-button type="primary">
