@@ -2,7 +2,8 @@
 
 import {provide} from "vue";
 import {Service, useServiceProvide} from "../compose/useService";
-import {AppBar, useAppBar, useAppBarProvide} from "../compose/useAppBar";
+import {AppBar, useAppBarProvide} from "../compose/useAppBar";
+import UserMenu from "./UserMenu.vue";
 
 const client = await useServiceProvide('https://api.hikit.io')
 
@@ -17,15 +18,7 @@ provide(AppBar, {showRight, toggleRight})
   <var-app-bar>
     HiAuth
     <template #right>
-      <var-menu v-if="showRight" placement="bottom" trigger="hover" :same-width="true">
-        <var-button text>
-          nieaowei
-          <var-icon name="chevron-down"></var-icon>
-        </var-button>
-        <template #menu>
-          <var-cell ripple>Profile</var-cell>
-        </template>
-      </var-menu>
+      <user-menu></user-menu>
     </template>
   </var-app-bar>
   <router-view></router-view>
