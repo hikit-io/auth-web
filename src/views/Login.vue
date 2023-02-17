@@ -63,23 +63,37 @@ const [loading, toggle] = useToggle(false)
 
 const onClick = () => {
   LoadingBar.start()
-  toggle()
+  // toggle()
 }
 </script>
 
 <template>
   <var-skeleton fullscreen :loading="loading"/>
-  <var-space direction="column">
-    <var-button @click="onClick">Tr</var-button>
-    <h3 v-if="from">
-      正在登录至 {{ from }}
-    </h3>
-    <h3 v-else>
-      正在登录
-    </h3>
-  </var-space>
+  <div class="card" :loading="loading">
+    <var-loading type="wave"></var-loading>
+    <var-space direction="column">
+      <var-space v-if="from" justify="center">
+        <h3>
+          正在登录至
+        </h3>
+        <h3>
+          <var-link type="info" :href="from.toString()"> {{ from }}</var-link>
+        </h3>
+      </var-space>
+      <h3 v-else>
+        正在登录
+      </h3>
+    </var-space>
+  </div>
 </template>
 
 <style scoped>
-
+.card {
+  text-align: center;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 </style>

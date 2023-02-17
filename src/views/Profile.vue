@@ -15,11 +15,31 @@ client.profile().then(value => {
 </script>
 
 <template>
-<!--  <a-card>-->
-<!--    <a-typography-title>Hi, {{ profile?.account}}</a-typography-title>-->
-<!--  </a-card>-->
+  <div class="card">
+    <div style="min-width: 50%;">
+      <h1>Hi, Nekilc </h1>
+      <var-list>
+        <var-cell title="Name" description="Nekilc"></var-cell>
+        <var-cell title="Email" description="nieaowei@hikit.io" ></var-cell>
+        <var-cell title="Account" description="nieaowei" ></var-cell>
+        <var-cell title="Github" description="nieaowei" ></var-cell>
+      </var-list>
+      <var-space>
+        <var-button type="primary">
+          Change Password
+        </var-button>
+        <var-button type="primary">
+          Change Password
+        </var-button>
+      </var-space>
+    </div>
+  </div>
 </template>›
 
 <style scoped>
-
+.card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 </style>

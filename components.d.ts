@@ -9,16 +9,18 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HTable: typeof import('./src/components/HTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VarAppBar: typeof import('@varlet/ui')['_AppBarComponent']
     VarButton: typeof import('@varlet/ui')['_ButtonComponent']
+    VarCell: typeof import('@varlet/ui')['_CellComponent']
     VarDivider: typeof import('@varlet/ui')['_DividerComponent']
     VarForm: typeof import('@varlet/ui')['_FormComponent']
     VarIcon: typeof import('@varlet/ui')['_IconComponent']
     VarInput: typeof import('@varlet/ui')['_InputComponent']
     VarLink: typeof import('@varlet/ui')['_LinkComponent']
+    VarList: typeof import('@varlet/ui')['_ListComponent']
+    VarLoading: typeof import('@varlet/ui')['_LoadingComponent']
     VarOption: typeof import('@varlet/ui')['_OptionComponent']
     VarSelect: typeof import('@varlet/ui')['_SelectComponent']
     VarSkeleton: typeof import('@varlet/ui')['_SkeletonComponent']
