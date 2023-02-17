@@ -7,6 +7,7 @@ import {useService} from "../compose/useService";
 import {useCookies} from "@vueuse/integrations/useCookies";
 import {LoadingBar} from "@varlet/ui";
 import {useToggle} from "@vueuse/core";
+import {useAppBar} from "../compose/useAppBar";
 
 const {push} = useRouter()
 
@@ -36,7 +37,10 @@ const cookies = useCookies()
 
 const client = useService()
 
-LoadingBar.start()
+const onSuccess = () => {
+  const {toggleRight} = useAppBar()
+  toggleRight(true)
+}
 
 if (method.value === "1") {
   client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
@@ -46,12 +50,14 @@ if (method.value === "1") {
     cookies.set('HIKIT', value.access_token, {
       domain: '.hikit.io'
     })
+    onSuccess()
   }).catch(reason => {
     console.log(reason)
   })
 } else {
   client.login(new LoginParams(new EmailLogin("", ""))).then(value => {
     console.log(value)
+    onSuccess()
   }).catch(reason => {
     console.log(reason)
   })
@@ -61,35 +67,32 @@ if (method.value === "1") {
 const [loading, toggle] = useToggle(false)
 
 
-const onClick = () => {
-  LoadingBar.start()
-  // toggle()
-}
 </script>
 
 <template>
-  <var-skeleton fullscreen :loading="loading"/>
-  <div class="card" :loading="loading">
-    <var-loading type="wave"></var-loading>
-    <var-space direction="column">
-      <var-space v-if="from" justify="center">
-        <h3>
-          正在登录至
-        </h3>
-        <h3>
-          <var-link type="info" :href="from.toString()"> {{ from }}</var-link>
-        </h3>
-      </var-space>
-      <h3 v-else>
-        正在登录
-      </h3>
-    </var-space>
+  <div class="card">
+    <var-loading :loading="loading" type="wave" size="large">
+      <template #description>
+        <var-space direction="column">
+          <var-space v-if="from" justify="center">
+            <h3>
+              正在登录至
+            </h3>
+            <h3>
+              <var-link type="info" :href="from.toString()"> {{ from }}</var-link>
+            </h3>
+          </var-space>
+          <h3 v-else>
+            正在登录
+          </h3>
+        </var-space>
+      </template>
+    </var-loading>
   </div>
 </template>
 
 <style scoped>
 .card {
-  text-align: center;
   width: 100%;
   min-height: 300px;
   display: flex;
