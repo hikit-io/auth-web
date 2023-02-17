@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {GithubFilled} from "@ant-design/icons-vue";
 import {useRouteQuery} from "@vueuse/router";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 
 const from = useRouteQuery('from', '')
 
@@ -25,51 +25,52 @@ const buildRedirectUrl = (url: string): string => {
   return `${url}?method=1`
 }
 
-const onLogin = (val:any) => {
-  // if (!form.email){
-  //
-  // }
-  // if (!form.password){
-  //
-  // }
+const onLogin = (val: any) => {
   console.log(val)
 }
 
+const emailSuffix = ref('@hikit.io')
 </script>
 
 <template>
-  <a-card class="card">
-    <h2>HiAuth</h2>
-    <div v-if="from" style="display: flex;flex-direction: row;align-items: center;">
-      <a-typography-text>
+  <div style="width: 100%; text-align: -webkit-center;">
+    <div class="card">
+      <div v-if="from" style="display: flex;flex-direction: row;align-items: center;">
+      <span style="font-size: 20px;">
         你将要登录至
-      </a-typography-text>
-      <a-button style="padding: 0;" type="link" @click="toUrl(from)">{{ from }}</a-button>
+      </span>
+        <var-link text-size="20" type="primary" :href="from" target="_blank">{{ from }}</var-link>
+      </div>
+      <var-form ref="form">
+        <var-space direction="column" :size="[14, 0]">
+          <var-space :size="[0,0]">
+            <var-input v-model="form.email" placeholder="Email" autofocus>
+            </var-input>
+            <var-select v-model="emailSuffix" style="width: 100px;">
+              <var-option label="@hikit.io"></var-option>
+            </var-select>
+          </var-space>
+          <var-input v-model="form.password" placeholder="Password" type="password"></var-input>
+          <var-button type="primary" ripple block> Login</var-button>
+          <var-divider></var-divider>
+          <var-button text outline @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))"
+                      size="normal"
+                      block>
+            <var-space direction="row" align="center">
+              <var-icon name="github"></var-icon>
+              <div style="width: 100%;">Sign in with Github</div>
+            </var-space>
+          </var-button>
+        </var-space>
+      </var-form>
     </div>
-    <a-form :model="form" @finish="onLogin">
-      <a-form-item name="email" :required="true">
-        <a-input v-model:value="form.email" placeholder="Email" addon-after="@hikit.io"></a-input>
-      </a-form-item>
-      <a-form-item name="password" :required="true">
-        <a-input-password v-model:value="form.password" placeholder="Password"></a-input-password>
-      </a-form-item>
-      <a-form-item>
-        <a-button html-type="submit" type="primary" block>Login</a-button>
-      </a-form-item>
-      <a-divider></a-divider>
-      <a-button @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))" size="middle" block>
-        <div style="display: flex; align-items: center; ">
-          <GithubFilled></GithubFilled>
-          <div style="width: 100%;">Sign in with Github</div>
-        </div>
-      </a-button>
-    </a-form>
-    <span>@Hikit</span>
-  </a-card>
+  </div>
 </template>
 
 <style scoped>
 .card {
-  min-width: 300px;
+  max-width: 300px;
+  padding: 1rem;
+  text-align: start;
 }
 </style>

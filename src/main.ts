@@ -1,9 +1,10 @@
 import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
 import {createRouter, createWebHistory} from "vue-router";
+import '@varlet/ui/es/button/style/index'
+import '@varlet/touch-emulator'
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,4 +25,6 @@ const router = createRouter({
     ]
 })
 
-createApp(App).use(router).use(Antd).mount('#app')
+createApp(App)
+    .use(router)
+    .mount('#app')

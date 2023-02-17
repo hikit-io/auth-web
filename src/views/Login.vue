@@ -5,7 +5,8 @@ import {useRouter} from "vue-router";
 import init, {Client, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useService} from "../compose/useService";
 import {useCookies} from "@vueuse/integrations/useCookies";
-import Cookies from "universal-cookie";
+import {LoadingBar} from "@varlet/ui";
+import {useToggle} from "@vueuse/core";
 
 const {push} = useRouter()
 
@@ -34,6 +35,9 @@ const routeTo = (firstLogin: boolean, from: string) => {
 const cookies = useCookies()
 
 const client = useService()
+
+LoadingBar.start()
+
 if (method.value === "1") {
   client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
     console.log(value)
@@ -54,18 +58,26 @@ if (method.value === "1") {
 }
 
 
+const [loading, toggle] = useToggle(false)
+
+
+const onClick = () => {
+  LoadingBar.start()
+  toggle()
+}
 </script>
 
 <template>
-  <a-space direction="vertical">
-    <a-spin size="large"></a-spin>
-    <a-typography-text v-if="from" strong>
+  <var-skeleton fullscreen :loading="loading"/>
+  <var-space direction="column">
+    <var-button @click="onClick">Tr</var-button>
+    <h3 v-if="from">
       正在登录至 {{ from }}
-    </a-typography-text>
-    <a-typography-text v-else strong>
+    </h3>
+    <h3 v-else>
       正在登录
-    </a-typography-text>
-  </a-space>
+    </h3>
+  </var-space>
 </template>
 
 <style scoped>

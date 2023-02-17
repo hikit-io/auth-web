@@ -9,7 +9,12 @@ provide(Service, client)
 </script>
 
 <template>
-<router-view></router-view>
+  <var-app-bar>HiAuth</var-app-bar>
+  <router-view></router-view>
+  <var-divider></var-divider>
+  <div style="width: 100%;text-align: center;">
+    <h3>@Hikit</h3>
+  </div>
 </template>
 
 <style scoped>

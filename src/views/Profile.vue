@@ -15,9 +15,9 @@ client.profile().then(value => {
 </script>
 
 <template>
-  <a-card>
-    <a-typography-title>Hi, {{ profile?.account}}</a-typography-title>
-  </a-card>
+<!--  <a-card>-->
+<!--    <a-typography-title>Hi, {{ profile?.account}}</a-typography-title>-->
+<!--  </a-card>-->
 </template>›
 
 <style scoped>
