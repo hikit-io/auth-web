@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import {GithubFilled} from "@ant-design/icons-vue";
 import {useRouteQuery} from "@vueuse/router";
 import {reactive, ref} from "vue";
 
@@ -42,14 +41,18 @@ const emailSuffix = ref('@hikit.io')
         <var-link text-size="20" type="primary" :href="from" target="_blank">{{ from }}</var-link>
       </div>
       <var-form ref="form">
-        <var-space direction="column" :size="[14, 0]">
-          <var-space :size="[0,0]">
-            <var-input v-model="form.email" placeholder="Email" autofocus>
-            </var-input>
-            <var-select v-model="emailSuffix" style="width: 100px;">
-              <var-option label="@hikit.io"></var-option>
-            </var-select>
-          </var-space>
+        <var-space direction="column" :size="[14, 0]" :wrap="false">
+          <var-row justify="center">
+            <var-col :span="16">
+              <var-input v-model="form.email" placeholder="Email" autofocus>
+              </var-input>
+            </var-col>
+            <var-col :span="8">
+              <var-select v-model="emailSuffix" style="min-width: 100px;">
+                <var-option label="@hikit.io"></var-option>
+              </var-select>
+            </var-col>
+          </var-row>
           <var-input v-model="form.password" placeholder="Password" type="password"></var-input>
           <var-button type="primary" ripple block> Login</var-button>
           <var-divider></var-divider>
