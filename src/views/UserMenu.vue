@@ -9,10 +9,12 @@ const cli = useService()
 
 const account = ref('account')
 
-cli.profile().then(value => {
-  account.value = value.account
-  toggleRight(true)
-})
+if (showRight.value) {
+  cli.profile().then(value => {
+    account.value = value.account
+    toggleRight(true)
+  })
+}
 
 </script>
 
@@ -24,7 +26,7 @@ cli.profile().then(value => {
     </var-button>
     <template #menu>
       <var-cell @click="onProfile" :ripple="true">Profile</var-cell>
-      <var-cell @click="logout" :ripple="true">Exit</var-cell>
+      <var-cell @click="[logout]" :ripple="true">Exit</var-cell>
     </template>
   </var-menu>
 </template>
