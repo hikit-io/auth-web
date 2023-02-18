@@ -2,6 +2,7 @@ import {inject, provide, Ref, ref} from "vue";
 import {useToggle} from "@vueuse/core";
 import {useCookies} from "@vueuse/integrations/useCookies";
 import {useRouter} from "vue-router";
+import {useAccessToken} from "./useAccessToken";
 
 
 const AppBar = Symbol()
@@ -17,12 +18,12 @@ interface AppBarContext {
 }
 
 const useAppBarProvide = (): AppBarContext => {
-    const cookies = useCookies()
     const {push} = useRouter()
+    const token = useAccessToken()
 
     const [showRight, toggleRight] = useToggle(false)
     const logout = () => {
-        cookies.remove('HIKIT', {path: '/'})
+        token.del()
         toggleRight(false)
         push('/').then(r => {
 

@@ -3,6 +3,7 @@ import {useCookies} from "@vueuse/integrations/useCookies";
 export interface AccessTokenContext {
     set: (accessToken: string) => void
     get: () => string
+    del: () => void
 }
 
 const useAccessToken = (): AccessTokenContext => {
@@ -23,7 +24,8 @@ const useAccessToken = (): AccessTokenContext => {
     }
     return {
         set,
-        get
+        get,
+        del
     }
 }
 
