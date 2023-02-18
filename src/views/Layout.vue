@@ -2,15 +2,16 @@
 
 import {provide} from "vue";
 import {Service, useServiceProvide} from "../compose/useService";
-import {AppBar, useAppBarProvide} from "../compose/useAppBar";
+import {AppBar, useAppBarProvide, AppBarContext} from "../compose/useAppBar";
 import UserMenu from "./UserMenu.vue";
 
+// Api Service
 const client = await useServiceProvide('https://api.hikit.io')
-
 provide(Service, client)
 
+// App bar state manage
 const {showRight, toggleRight} = useAppBarProvide()
-provide(AppBar, {showRight, toggleRight})
+provide(AppBar, {showRight, toggleRight} as AppBarContext)
 
 </script>
 

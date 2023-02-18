@@ -7,7 +7,7 @@ import {useCookies} from "@vueuse/integrations/useCookies";
 
 const {push} = useRouter()
 
-const {showRight, toggleRight} = useAppBar()
+const {showRight, toggleRight, logout, onProfile} = useAppBar()
 
 const cli = useService()
 
@@ -18,11 +18,6 @@ cli.profile().then(value => {
   toggleRight(true)
 })
 
-const logout = () => {
-  const cookies = useCookies()
-  cookies.remove("HIKIT")
-  push('/')
-}
 </script>
 
 <template>
@@ -32,7 +27,7 @@ const logout = () => {
       <var-icon name="chevron-down"></var-icon>
     </var-button>
     <template #menu>
-      <var-cell @click="push({path:'profile'})" ripple>Profile</var-cell>
+      <var-cell @click="onProfile" ripple>Profile</var-cell>
       <var-cell @click="logout" ripple>Exit</var-cell>
     </template>
   </var-menu>
