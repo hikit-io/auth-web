@@ -1,34 +1,8 @@
 <script setup lang="ts">
 import Layout from "./views/Layout.vue";
-import {useCookies} from "@vueuse/integrations/useCookies";
-import {useRouter} from "vue-router";
-import {useDebug} from "./compose/useDebug";
+import {useRoute, useRouter} from "vue-router";
+import {useAccessToken} from "./compose/useAccessToken";
 
-// useDebug()
-
-const {push} = useRouter()
-const cookies = useCookies()
-
-const token = cookies.get("HIKIT")
-
-if (token) {
-  push('/profile')
-} else {
-  push('/')
-}
-
-cookies.removeChangeListener((options) => {
-  console.log(options)
-  if (options.name == "HIKIT") {
-    push('/')
-  }
-})
-
-cookies.addChangeListener((options) => {
-  if (options.name == "HIKIT") {
-    push('/profile')
-  }
-})
 
 </script>
 

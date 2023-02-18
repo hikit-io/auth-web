@@ -4,14 +4,30 @@ import {provide} from "vue";
 import {Service, useServiceProvide} from "../compose/useService";
 import {AppBar, useAppBarProvide, AppBarContext} from "../compose/useAppBar";
 import UserMenu from "./UserMenu.vue";
+import {useAccessToken} from "../compose/useAccessToken";
+import {useRouter} from "vue-router";
+
+const {push} = useRouter()
 
 // Api Service
-const client = await useServiceProvide('https://api.hikit.io')
-provide(Service, client)
+const svc = await useServiceProvide('https://api.hikit.io')
+provide(Service, svc)
 
 // App bar state manage
 const appBarContext = useAppBarProvide()
 provide(AppBar, appBarContext as AppBarContext)
+
+// Check Login
+const token = useAccessToken()
+if (token.get()) {
+  svc.profile().then(value => {
+    appBarContext.toggleRight(true)
+  }).catch(reason => {
+    push('/')
+  })
+} else {
+  push('/')
+}
 
 </script>
 

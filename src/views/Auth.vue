@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import {useRouteQuery} from "@vueuse/router";
 import {reactive, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {useAccessToken} from "../compose/useAccessToken";
 
 const from = useRouteQuery('from', '')
 
@@ -29,6 +31,21 @@ const onLogin = (val: any) => {
 }
 
 const emailSuffix = ref('@hikit.io')
+
+const {push} = useRouter()
+
+const token = useAccessToken()
+
+if (token.get()) {
+  const {query} = useRoute()
+  push({
+    path: '/login',
+    query: query
+  })
+} else {
+  push('/')
+}
+
 </script>
 
 <template>
@@ -54,7 +71,7 @@ const emailSuffix = ref('@hikit.io')
             </var-col>
           </var-row>
           <var-input v-model="form.password" placeholder="Password" type="password"></var-input>
-          <var-button type="primary" ripple block> Login</var-button>
+          <var-button type="primary" ripple block> Login </var-button>
           <var-divider></var-divider>
           <var-button text outline @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))"
                       size="normal"
