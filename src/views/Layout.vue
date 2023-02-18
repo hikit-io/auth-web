@@ -22,14 +22,20 @@ const token = useAccessToken()
 const {push} = useRouter()
 
 router.beforeResolve((to, from) => {
+  console.log('checkLogin')
+
   if (token.get()) {
     svc.profile().then(value => {
+      console.log(value)
       appBarContext.toggleRight(true)
     }).catch(reason => {
+      console.log(reason)
       push('/')
     })
-  } else if (to.path === '/login') {
+  } else if (to.path === '/login'||to.path === '/') {
 
+  } else {
+    push('/')
   }
 })
 
