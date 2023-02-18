@@ -1,6 +1,5 @@
 import {inject, provide, Ref, ref} from "vue";
 import {useToggle} from "@vueuse/core";
-import {useCookies} from "@vueuse/integrations/useCookies";
 import {useRouter} from "vue-router";
 import {useAccessToken} from "./useAccessToken";
 
