@@ -14,7 +14,9 @@ const useAccessToken = (): AccessTokenContext => {
         })
     }
     const get = () => {
-        return cookies.get<string>('HIKIT')
+        const cookie = cookies.get<string>('HIKIT')
+        console.log(cookie)
+        return cookie
     }
     const del = () => {
         cookies.remove('HIKIT', {
