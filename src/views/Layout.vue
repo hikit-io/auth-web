@@ -50,12 +50,16 @@ router.beforeResolve((to, from) => {
     </template>
   </var-app-bar>
   <router-view></router-view>
-  <var-divider></var-divider>
-  <div style="width: 100%;text-align: center;">
+  <div style="flex: 1;"></div>
+  <div class="footer" >
+    <var-divider></var-divider>
     <h3>@Hikit</h3>
   </div>
 </template>
 
 <style scoped>
-
+.footer{
+  width: 100%;
+  text-align: center;
+}
 </style>
