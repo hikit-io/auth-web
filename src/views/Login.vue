@@ -22,7 +22,7 @@ const token = useAccessToken()
 const routeTo = (firstLogin: boolean, from: string) => {
   if (from) {
     window.location.href = from
-  }else{
+  } else {
     push('/profile')
   }
 }
@@ -35,8 +35,8 @@ const client = useService()
 
 if (method.value === "1") {
   client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
-    routeTo(false, "")
     token.set(value.access_token)
+    routeTo(false, from.value as string)
   }).catch(reason => {
     console.log(reason)
   })
