@@ -24,36 +24,44 @@ client.profile().then(value => {
   <div class="card">
     <loading v-if="loading" :loading="loading"></loading>
     <div v-else>
-      <h1>Hi, {{ profile?.account }} </h1>
-      <var-list>
-        <var-cell title="Name" description="Nekilc" border>
-          <template #icon>
-            <var-icon name="email-outlined" :size="34"></var-icon>
-          </template>
-        </var-cell>
-        <var-cell title="Email" description="nieaowei@hikit.io" border>
-          <template #icon>
-            <var-icon name="email-outlined" :size="34"></var-icon>
-          </template>
-        </var-cell>
-        <var-cell title="Account" description="nieaowei" border>
-          <template #icon>
-            <var-icon name="account" :size="34"></var-icon>
-          </template>
-        </var-cell>
-        <var-cell title="Github" description="nieaowei" border>
-          <template #icon>
-            <var-icon name="github" :size="34"></var-icon>
-          </template>
-        </var-cell>
-      </var-list>
-      <var-space>
-        <var-button type="primary">
-          Change Password
-        </var-button>
-        <var-button type="primary">
-          Change Password
-        </var-button>
+      <var-space direction="column">
+        <h1>Hi, {{ profile?.account }} </h1>
+        <var-list>
+          <var-cell title="ID" :description="profile?.id" border>
+            <template #icon>
+              <var-icon name="email-outlined" :size="34"></var-icon>
+            </template>
+          </var-cell>
+          <var-cell title="Email" :description="profile?.email ? profile.email:'Not setting'" border>
+            <template #icon>
+              <var-icon name="email-outlined" :size="34"></var-icon>
+            </template>
+            <template #extra>
+              <var-icon name="information-outline" :size="30"></var-icon>
+            </template>
+          </var-cell>
+          <var-cell title="Account" description="nieaowei" border>
+            <template #icon>
+              <var-icon name="account" :size="34"></var-icon>
+            </template>
+            <template #extra>
+              <var-icon name="information-outline" :size="30"></var-icon>
+            </template>
+          </var-cell>
+          <var-cell title="Github" description="nieaowei" border>
+            <template #icon>
+              <var-icon name="github" :size="30"></var-icon>
+            </template>
+          </var-cell>
+        </var-list>
+        <var-space>
+          <var-button type="primary">
+            Change Password
+          </var-button>
+          <var-button type="danger">
+            Delete Account
+          </var-button>
+        </var-space>
       </var-space>
     </div>
   </div>
