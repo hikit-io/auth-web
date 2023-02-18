@@ -4,6 +4,7 @@ import {ref} from "vue";
 import {ProfileResp} from "@hikit/auth-service";
 import Loading from "../components/Loading.vue";
 import {useToggle} from "@vueuse/core";
+import Icon from "../components/Icon.vue"
 
 const client = useService()
 
@@ -48,9 +49,14 @@ client.profile().then(value => {
               <var-icon name="information-outline" :size="30"></var-icon>
             </template>
           </var-cell>
+          <var-cell title="OTP" description="Bind" border>
+            <template #extra>
+              <icon name="qrcode" :size="30"></icon>
+            </template>
+          </var-cell>
           <var-cell title="Github" description="nieaowei" border>
             <template #icon>
-              <var-icon name="github" :size="30"></var-icon>
+              <icon name="github" :size="30"></icon>
             </template>
           </var-cell>
         </var-list>

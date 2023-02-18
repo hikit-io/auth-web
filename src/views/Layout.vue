@@ -53,7 +53,7 @@ router.beforeResolve((to, from) => {
   <div style="flex: 1;"></div>
   <div class="footer" >
     <var-divider></var-divider>
-    <h4>@Hikit</h4>
+    <h4>@HiKit</h4>
   </div>
 </template>
 
