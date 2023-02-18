@@ -18,7 +18,6 @@ watch(showRight, (value) => {
   }
 })
 
-
 </script>
 
 <template>

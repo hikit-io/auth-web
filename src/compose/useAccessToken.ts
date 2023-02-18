@@ -6,7 +6,7 @@ export interface AccessTokenContext {
 }
 
 const useAccessToken = (): AccessTokenContext => {
-    const cookies = useCookies(['HIKIT'])
+    const cookies = useCookies()
     const set = (accessToken: string) => {
         cookies.set('HIKIT', accessToken, {
             domain: '.hikit.io'
@@ -14,6 +14,12 @@ const useAccessToken = (): AccessTokenContext => {
     }
     const get = () => {
         return cookies.get<string>('HIKIT')
+    }
+    const del = () => {
+        cookies.remove('HIKIT', {
+            path: '/',
+            domain: '.hikit.io'
+        })
     }
     return {
         set,
