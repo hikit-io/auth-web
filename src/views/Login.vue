@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {useRouteQuery} from "@vueuse/router";
 import {reactive} from "vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useService} from "../compose/useService";
 import {useToggle} from "@vueuse/core";
@@ -12,6 +12,10 @@ const {push} = useRouter()
 const code = useRouteQuery('code', '')
 const from = useRouteQuery('from')
 const method = useRouteQuery('method')
+
+const {path} = useRoute()
+
+console.log(path)
 
 const form = reactive({
   code: code.value,

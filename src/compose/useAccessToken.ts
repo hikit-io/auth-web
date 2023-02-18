@@ -23,6 +23,9 @@ const useAccessToken = (): AccessTokenContext => {
             path: '/',
             domain: '.hikit.io'
         })
+        cookies.remove('HIKIT', {
+            path: '/',
+        })
     }
     return {
         set,

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import Layout from "./views/Layout.vue";
-import {useRoute, useRouter} from "vue-router";
-import {useAccessToken} from "./compose/useAccessToken";
-
 
 </script>
 

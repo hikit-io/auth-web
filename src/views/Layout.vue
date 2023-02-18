@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 
-import {provide} from "vue";
+import {onMounted, provide} from "vue";
 import {Service, useServiceProvide} from "../compose/useService";
 import {AppBar, useAppBarProvide, AppBarContext} from "../compose/useAppBar";
 import UserMenu from "./UserMenu.vue";
 import {useAccessToken} from "../compose/useAccessToken";
 import {useRoute, useRouter} from "vue-router";
 
-const {push} = useRouter()
-const route = useRoute()
 
 // Api Service
 const svc = await useServiceProvide('https://api.hikit.io')
@@ -19,18 +17,22 @@ const appBarContext = useAppBarProvide()
 provide(AppBar, appBarContext as AppBarContext)
 
 // Check Login
+const router = useRouter()
 const token = useAccessToken()
-if (token.get()) {
-  svc.profile().then(value => {
-    appBarContext.toggleRight(true)
-  }).catch(reason => {
-    push('/')
-  })
-} else if (route.path === '/login') {
+const {push} = useRouter()
 
-} else {
-  push('/')
-}
+router.beforeResolve((to, from) => {
+  if (token.get()) {
+    svc.profile().then(value => {
+      appBarContext.toggleRight(true)
+    }).catch(reason => {
+      push('/')
+    })
+  } else if (to.path === '/login') {
+
+  }
+})
+
 
 </script>
 
