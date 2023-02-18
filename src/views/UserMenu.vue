@@ -23,7 +23,8 @@ cli.profile().then(value => {
       <var-icon name="chevron-down"></var-icon>
     </var-button>
     <template #menu>
-      <var-cell ripple>Profile</var-cell>
+      <var-link :to="{ path:'/profile' }">Profile</var-link>
+      <var-button :text="true">Exit</var-button>
     </template>
   </var-menu>
 </template>

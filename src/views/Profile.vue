@@ -26,12 +26,24 @@ client.profile().then(value => {
     <div v-else>
       <h1>Hi, {{ profile?.account }} </h1>
       <var-list>
-        <var-cell title="Name" description="Nekilc"></var-cell>
-        <var-cell title="Email" description="nieaowei@hikit.io"></var-cell>
-        <var-cell title="Account" description="nieaowei"></var-cell>
-        <var-cell title="Github" description="nieaowei">
+        <var-cell title="Name" description="Nekilc" border>
           <template #icon>
-            <var-icon name="github"></var-icon>
+            <var-icon name="email-outlined" :size="34"></var-icon>
+          </template>
+        </var-cell>
+        <var-cell title="Email" description="nieaowei@hikit.io" border>
+          <template #icon>
+            <var-icon name="email-outlined" :size="34"></var-icon>
+          </template>
+        </var-cell>
+        <var-cell title="Account" description="nieaowei" border>
+          <template #icon>
+            <var-icon name="account" :size="34"></var-icon>
+          </template>
+        </var-cell>
+        <var-cell title="Github" description="nieaowei" border>
+          <template #icon>
+            <var-icon name="github" :size="34"></var-icon>
           </template>
         </var-cell>
       </var-list>
