@@ -5,9 +5,10 @@ import {Service, useServiceProvide} from "../compose/useService";
 import {AppBar, useAppBarProvide, AppBarContext} from "../compose/useAppBar";
 import UserMenu from "./UserMenu.vue";
 import {useAccessToken} from "../compose/useAccessToken";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const {push} = useRouter()
+const route = useRoute()
 
 // Api Service
 const svc = await useServiceProvide('https://api.hikit.io')
@@ -25,6 +26,8 @@ if (token.get()) {
   }).catch(reason => {
     push('/')
   })
+} else if (route.path === '/login') {
+
 } else {
   push('/')
 }
