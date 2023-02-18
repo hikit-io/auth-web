@@ -2,12 +2,8 @@
 import {useAppBar} from "../compose/useAppBar";
 import {useService} from "../compose/useService";
 import {ref} from "vue";
-import {useRouter} from "vue-router";
-import {useCookies} from "@vueuse/integrations/useCookies";
 
-const {push} = useRouter()
-
-const {showRight, toggleRight, logout, onProfile} = useAppBar()
+const {showRight, toggleRight, onProfile, logout} = useAppBar()
 
 const cli = useService()
 
@@ -27,8 +23,8 @@ cli.profile().then(value => {
       <var-icon name="chevron-down"></var-icon>
     </var-button>
     <template #menu>
-      <var-cell @click="onProfile" ripple>Profile</var-cell>
-      <var-cell @click="logout" ripple>Exit</var-cell>
+      <var-cell @click="onProfile" :ripple="true">Profile</var-cell>
+      <var-cell @click="logout" :ripple="true">Exit</var-cell>
     </template>
   </var-menu>
 </template>

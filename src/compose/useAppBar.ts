@@ -9,27 +9,27 @@ const AppBar = Symbol()
 interface AppBarContext {
     showRight: Ref<boolean>
 
-    toggleRight(value?: (boolean | undefined)): boolean
+    toggleRight: (value?: (boolean | undefined)) => boolean
 
-    logout(): void
+    logout: () => void
 
-    onProfile(): void
+    onProfile: () => void
 }
 
 const useAppBarProvide = (): AppBarContext => {
+    const cookies = useCookies()
+    const {push} = useRouter()
+
     const [showRight, toggleRight] = useToggle(false)
     const logout = () => {
-        const cookies = useCookies()
-        const {push} = useRouter()
-
         push('/').then(r => {
-            cookies.remove('HIKIT')
+            cookies.remove('HIKIT', {path: '/'})
             toggleRight(false)
         })
     }
     const onProfile = () => {
-        const {push} = useRouter()
-        push('/profile')
+        push('/profile').then(r => {
+        })
     }
     return {
         showRight,

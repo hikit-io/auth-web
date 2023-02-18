@@ -10,8 +10,8 @@ const client = await useServiceProvide('https://api.hikit.io')
 provide(Service, client)
 
 // App bar state manage
-const {showRight, toggleRight} = useAppBarProvide()
-provide(AppBar, {showRight, toggleRight} as AppBarContext)
+const appBarContext = useAppBarProvide()
+provide(AppBar, appBarContext as AppBarContext)
 
 </script>
 
