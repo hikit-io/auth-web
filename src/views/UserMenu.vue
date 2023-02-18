@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {useAppBar} from "../compose/useAppBar";
 import {useService} from "../compose/useService";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 const {showRight, toggleRight, onProfile, logout} = useAppBar()
 
@@ -9,12 +9,15 @@ const cli = useService()
 
 const account = ref('account')
 
-if (showRight.value) {
-  cli.profile().then(value => {
-    account.value = value.account
-    toggleRight(true)
-  })
-}
+watch(showRight, (value) => {
+  if (value) {
+    cli.profile().then(value => {
+      account.value = value.account
+      toggleRight(true)
+    })
+  }
+})
+
 
 </script>
 
@@ -26,7 +29,7 @@ if (showRight.value) {
     </var-button>
     <template #menu>
       <var-cell @click="onProfile" :ripple="true">Profile</var-cell>
-      <var-cell @click="[logout]" :ripple="true">Exit</var-cell>
+      <var-cell @click="logout" :ripple="true">Exit</var-cell>
     </template>
   </var-menu>
 </template>

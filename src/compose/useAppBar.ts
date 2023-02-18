@@ -22,9 +22,10 @@ const useAppBarProvide = (): AppBarContext => {
 
     const [showRight, toggleRight] = useToggle(false)
     const logout = () => {
+        cookies.remove('HIKIT', {path: '/'})
+        toggleRight(false)
         push('/').then(r => {
-            cookies.remove('HIKIT', {path: '/'})
-            toggleRight(false)
+
         })
     }
     const onProfile = () => {
