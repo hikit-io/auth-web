@@ -30,6 +30,7 @@ router.beforeResolve((to, from) => {
       appBarContext.toggleRight(true)
     }).catch(reason => {
       console.log(reason)
+      token.del()
       push('/')
     })
   } else if (to.path === '/login'||to.path === '/') {
