@@ -2,7 +2,7 @@
 import {useRouteQuery} from "@vueuse/router";
 import {reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
+import {Code, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useService} from "../compose/useService";
 import {useToggle} from "@vueuse/core";
 import {useAccessToken} from "../compose/useAccessToken";
@@ -42,6 +42,9 @@ if (method.value === "1") {
     token.set(value.access_token)
     routeTo(false, from.value as string)
   }).catch(reason => {
+    if (reason.code == Code.NotSupportLoginMethod){
+
+    }
     console.log(reason)
   })
 } else if (method.value === "2") {

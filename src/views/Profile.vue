@@ -26,25 +26,24 @@ client.profile().then(value => {
     <loading v-if="loading" :loading="loading"></loading>
     <div v-else>
       <var-space direction="column">
-        <h1>Hi, {{ profile?.account }} </h1>
+        <h1>Hi, {{ profile?.name }} </h1>
         <var-list>
           <var-cell title="ID" :description="profile?.id" border>
             <template #icon>
               <var-icon name="email-outlined" :size="34"></var-icon>
             </template>
           </var-cell>
-          <var-cell title="Email" :description="profile?.email ? profile.email:'Not setting'" border>
-            <template #icon>
-              <var-icon name="email-outlined" :size="34"></var-icon>
+          <var-cell title="Name" :description="profile?.name ? profile.name:'Not setting'" border>
+            <template #extra>
+              <var-icon name="information-outline" :size="30"></var-icon>
             </template>
+          </var-cell>
+          <var-cell title="Email" :description="profile?.email ? profile.email:'Not setting'" border>
             <template #extra>
               <var-icon name="information-outline" :size="30"></var-icon>
             </template>
           </var-cell>
           <var-cell title="Account" description="nieaowei" border>
-            <template #icon>
-              <var-icon name="account" :size="34"></var-icon>
-            </template>
             <template #extra>
               <var-icon name="information-outline" :size="30"></var-icon>
             </template>
