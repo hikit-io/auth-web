@@ -38,20 +38,27 @@ if (token.get()) {
 const genLoginParams = () => {
   if (method.value === '1') {
     return {
-      code: code.value
-    } as GithubLogin
+      github: {
+        code: code.value
+      } as GithubLogin
+    } as LoginParams
   }
-  return {}
+  return {
+    email: {
+      email: '',
+      password: ''
+    } as EmailLogin
+  } as LoginParams
 }
 
-const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess,error} = useLoginMutation({
+const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess, error} = useLoginMutation({
   variables: {
     by: genLoginParams()
   },
 })
 
 onLoginSuccess(param => {
-  if (param.data){
+  if (param.data) {
     token.set(param.data.login.idToken)
     routeTo(false, from.value as string)
     return
@@ -63,7 +70,7 @@ onLoginError(param => {
   console.log(param.message)
 })
 
-if (method.value){
+if (method.value) {
   login()
 }
 
