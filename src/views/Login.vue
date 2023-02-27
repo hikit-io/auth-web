@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {useRouteQuery} from "@vueuse/router";
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Code, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useToggle} from "@vueuse/core";
@@ -72,10 +72,11 @@ onLoginError(param => {
   console.log(param.message)
 })
 
-if (method.value) {
-  login()
-}
-
+onMounted(() => {
+  if (method.value) {
+    login()
+  }
+})
 
 </script>
 
