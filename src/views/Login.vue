@@ -3,9 +3,9 @@ import {useRouteQuery} from "@vueuse/router";
 import {reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {Code, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
-import {useService} from "../compose/useService";
 import {useToggle} from "@vueuse/core";
 import {useAccessToken} from "../compose/useAccessToken";
+import {useLoginMutation} from "../composable/useService";
 
 const {push} = useRouter()
 
@@ -35,27 +35,57 @@ if (token.get()) {
   routeTo(false, from.value as string)
 }
 
-const client = useService()
-
-if (method.value === "1") {
-  client.login(new LoginParams(undefined, new GithubLogin(code.value))).then(value => {
-    token.set(value.access_token)
-    routeTo(false, from.value as string)
-  }).catch(reason => {
-    if (reason.code == Code.NotSupportLoginMethod){
-
-    }
-    console.log(reason)
-  })
-} else if (method.value === "2") {
-  client.login(new LoginParams(new EmailLogin("", ""))).then(value => {
-    console.log(value)
-  }).catch(reason => {
-    console.log(reason)
-  })
+const genLoginParams = () => {
+  if (method.value === '1') {
+    return {
+      code: code.value
+    } as GithubLogin
+  }
+  return {}
 }
 
-const [loading] = useToggle(false)
+const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess,error} = useLoginMutation({
+  variables: {
+    by: genLoginParams()
+  },
+})
+
+onLoginSuccess(param => {
+  if (param.data){
+    token.set(param.data.login.idToken)
+    return
+  }
+  console.log(param.errors)
+})
+
+onLoginError(param => {
+  console.log(param.message)
+})
+
+if (method.value){
+  login()
+}
+
+//
+// if (method.value === "1") {
+//   login().then(value => {
+//     token.set(value?.data)
+//     routeTo(false, from.value as string)
+//   }).catch(reason => {
+//     if (reason.code == Code.NotSupportLoginMethod) {
+//
+//     }
+//     console.log(reason)
+//   })
+// } else if (method.value === "2") {
+//   client.login(new LoginParams(new EmailLogin("", ""))).then(value => {
+//     console.log(value)
+//   }).catch(reason => {
+//     console.log(reason)
+//   })
+// }
+
+// const [loading] = useToggle(false)
 
 </script>
 

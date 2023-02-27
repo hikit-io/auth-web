@@ -1,0 +1,8 @@
+
+mutation login($by:LoginParams!){
+    login(by: $by){
+        idToken
+        accessToken
+        expires
+    }
+}
