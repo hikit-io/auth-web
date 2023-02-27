@@ -53,6 +53,7 @@ const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess,err
 onLoginSuccess(param => {
   if (param.data){
     token.set(param.data.login.idToken)
+    routeTo(false, from.value as string)
     return
   }
   console.log(param.errors)
