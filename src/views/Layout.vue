@@ -22,18 +22,18 @@ const token = useAccessToken()
 const {push} = useRouter()
 
 router.beforeResolve((to, from) => {
-  console.log('checkLogin')
+  console.log('[checkLogin]')
 
   if (token.get()) {
     svc.profile().then(value => {
-      console.log(value)
+      console.log(`[checkLogin] ${value}`)
       appBarContext.toggleRight(true)
     }).catch(reason => {
-      console.log(reason)
+      console.log(`[checkLogin] ${reason}`)
       token.del()
       push('/')
     })
-  } else if (to.path === '/login'||to.path === '/') {
+  } else if (to.path === '/login' || to.path === '/') {
 
   } else {
     push('/')
@@ -52,14 +52,14 @@ router.beforeResolve((to, from) => {
   </var-app-bar>
   <router-view></router-view>
   <div style="flex: 1;"></div>
-  <div class="footer" >
+  <div class="footer">
     <var-divider></var-divider>
     <h4>@HiKit</h4>
   </div>
 </template>
 
 <style scoped>
-.footer{
+.footer {
   width: 100%;
   text-align: center;
 }

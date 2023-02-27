@@ -15,8 +15,6 @@ const method = useRouteQuery('method')
 
 const {path} = useRoute()
 
-console.log(path)
-
 const form = reactive({
   code: code.value,
 })
