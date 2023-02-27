@@ -51,13 +51,14 @@ const genLoginParams = () => {
   } as LoginParams
 }
 
-const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess, error} = useLoginMutation({
+const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess} = useLoginMutation({
   variables: {
     by: genLoginParams()
   },
 })
 
 onLoginSuccess(param => {
+  console.log('onLoginSuccess')
   if (param.data) {
     token.set(param.data.login.idToken)
     routeTo(false, from.value as string)
@@ -67,6 +68,7 @@ onLoginSuccess(param => {
 })
 
 onLoginError(param => {
+  console.log('onLoginError')
   console.log(param.message)
 })
 
@@ -74,26 +76,6 @@ if (method.value) {
   login()
 }
 
-//
-// if (method.value === "1") {
-//   login().then(value => {
-//     token.set(value?.data)
-//     routeTo(false, from.value as string)
-//   }).catch(reason => {
-//     if (reason.code == Code.NotSupportLoginMethod) {
-//
-//     }
-//     console.log(reason)
-//   })
-// } else if (method.value === "2") {
-//   client.login(new LoginParams(new EmailLogin("", ""))).then(value => {
-//     console.log(value)
-//   }).catch(reason => {
-//     console.log(reason)
-//   })
-// }
-
-// const [loading] = useToggle(false)
 
 </script>
 
