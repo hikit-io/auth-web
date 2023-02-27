@@ -56,7 +56,7 @@ const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess} = 
 })
 
 onLoginSuccess(param => {
-  console.log('onLoginSuccess')
+  console.log(`[onLoginSuccess] ${param.data}`)
   if (param.data) {
     token.set(param.data.login.idToken)
     routeTo(false, from.value as string)
@@ -66,7 +66,7 @@ onLoginSuccess(param => {
 })
 
 onLoginError(param => {
-  console.log('onLoginError')
+  console.log('[onLoginError] ')
   console.log(param.message)
 })
 
