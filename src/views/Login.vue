@@ -2,8 +2,7 @@
 import {useRouteQuery} from "@vueuse/router";
 import {onMounted, reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {Code, EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
-import {useToggle} from "@vueuse/core";
+import {EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useAccessToken} from "../compose/useAccessToken";
 import {useLoginMutation} from "../composable/useService";
 
@@ -55,23 +54,28 @@ const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess} = 
   },
 })
 
-onLoginSuccess(param => {
-  console.log(`[onLoginSuccess] ${param.data}`)
-  if (param.data) {
-    token.set(param.data.login.idToken)
-    routeTo(false, from.value as string)
-  }
-  console.log(param.errors)
-})
-
-onLoginError(param => {
-  console.log('[onLoginError] ')
-  console.log(param.message)
-})
+// onLoginSuccess(param => {
+//   console.log(`[onLoginSuccess] ${param.data}`)
+//   if (param.data) {
+//     token.set(param.data.login.idToken)
+//     routeTo(false, from.value as string)
+//   }
+//   console.log(param.errors)
+// })
+//
+// onLoginError(param => {
+//   console.log('[onLoginError] ')
+//   console.log(param.message)
+// })
 
 onMounted(() => {
   if (method.value) {
-    login()
+    login().then(param => {
+      if (param?.data) {
+        token.set(param.data.login.idToken)
+        routeTo(false, from.value as string)
+      }
+    })
   }
 })
 
