@@ -17,8 +17,14 @@ type Mutation {
     login(by: LoginParams!): LoginResp!
 }
 
+type Profile {
+    email: String!
+    id: String!
+    name: String!
+}
+
 type Query {
-    profile: String!
+    profile: Profile!
 }
 
 input EmailLoginParams {

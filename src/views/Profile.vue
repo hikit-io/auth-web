@@ -1,23 +1,13 @@
 <script lang="ts" setup>
-import {useService} from "../compose/useService";
-import {ref} from "vue";
-import {ProfileResp} from "@hikit/auth-service";
+import {computed, ref} from "vue";
 import Loading from "../components/Loading.vue";
-import {useToggle} from "@vueuse/core";
 import Icon from "../components/Icon.vue"
+import {useGetProfileQuery} from "../composable/useService";
 
-const client = useService()
 
-const profile = ref<ProfileResp>()
+const {loading, result} = useGetProfileQuery()
 
-const [loading, toggle] = useToggle(true)
-
-client.profile().then(value => {
-  profile.value = value
-  toggle()
-}).catch(reason => {
-  console.log(reason)
-})
+const profile = computed(() => result.value?.profile)
 
 </script>
 

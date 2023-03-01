@@ -2,9 +2,8 @@
 import {useRouteQuery} from "@vueuse/router";
 import {onMounted, reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {EmailLogin, GithubLogin, LoginParams} from '@hikit/auth-service'
 import {useAccessToken} from "../compose/useAccessToken";
-import {useLoginMutation} from "../composable/useService";
+import {EmailLoginParams, GithubLoginParams, LoginParams, useLoginMutation} from "../composable/useService";
 
 const {push} = useRouter()
 
@@ -28,23 +27,20 @@ const routeTo = (firstLogin: boolean, from: string) => {
   }
 }
 
-if (token.get()) {
-  routeTo(false, from.value as string)
-}
 
 const genLoginParams = () => {
   if (method.value === '1') {
     return {
       github: {
         code: code.value
-      } as GithubLogin
+      } as GithubLoginParams
     } as LoginParams
   }
   return {
     email: {
       email: '',
       password: ''
-    } as EmailLogin
+    } as EmailLoginParams
   } as LoginParams
 }
 
@@ -54,28 +50,25 @@ const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess} = 
   },
 })
 
-// onLoginSuccess(param => {
-//   console.log(`[onLoginSuccess] ${param.data}`)
-//   if (param.data) {
-//     token.set(param.data.login.idToken)
-//     routeTo(false, from.value as string)
-//   }
-//   console.log(param.errors)
-// })
-//
-// onLoginError(param => {
-//   console.log('[onLoginError] ')
-//   console.log(param.message)
-// })
+onLoginSuccess(param => {
+  console.log(`[onLoginSuccess] ${param.data}`)
+  if (param.data) {
+    token.set(param.data.login.idToken)
+    routeTo(false, from.value as string)
+  }
+  console.log(param.errors)
+})
+
+onLoginError(param => {
+  console.log('[onLoginError] ')
+  console.log(param.message)
+})
 
 onMounted(() => {
-  if (method.value) {
-    login().then(param => {
-      if (param?.data) {
-        token.set(param.data.login.idToken)
-        routeTo(false, from.value as string)
-      }
-    })
+  if (token.get()) {
+    routeTo(false, from.value as string)
+  } else if (method.value) {
+    login()
   }
 })
 

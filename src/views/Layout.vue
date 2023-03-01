@@ -1,16 +1,12 @@
 <script lang="ts" setup>
 
-import {onMounted, provide} from "vue";
-import {Service, useServiceProvide} from "../compose/useService";
+import {provide} from "vue";
 import {AppBar, useAppBarProvide, AppBarContext} from "../compose/useAppBar";
 import UserMenu from "./UserMenu.vue";
 import {useAccessToken} from "../compose/useAccessToken";
 import {useRoute, useRouter} from "vue-router";
+import {useGetNameLazyQuery} from "../composable/useService";
 
-
-// Api Service
-const svc = await useServiceProvide('https://api.hikit.io')
-provide(Service, svc)
 
 // App bar state manage
 const appBarContext = useAppBarProvide()
@@ -18,26 +14,45 @@ provide(AppBar, appBarContext as AppBarContext)
 
 // Check Login
 const router = useRouter()
+const route = useRoute()
 const token = useAccessToken()
 const {push} = useRouter()
 
-router.beforeResolve((to, from) => {
-  console.log('[checkLogin]')
+const {result, load, onResult, onError} = useGetNameLazyQuery()
 
-  if (token.get()) {
-    svc.profile().then(value => {
-      console.log(`[checkLogin] ${value}`)
-      appBarContext.toggleRight(true)
-    }).catch(reason => {
-      console.log(`[checkLogin] ${reason}`)
-      token.del()
-      push('/')
-    })
-  } else if (to.path === '/login' || to.path === '/') {
+onResult(param => {
+  if (param.data.profile) {
 
-  } else {
-    push('/')
   }
+})
+
+onError(param => {
+  push('/')
+})
+
+
+router.beforeResolve((to, from) => {
+  if (to.path === '/login' || to.path === '/'){
+
+  }else {
+    load()
+  }
+  // console.log('[checkLogin]')
+  //
+  // if (token.get()) {
+  //   svc.profile().then(value => {
+  //     console.log(`[checkLogin] ${value}`)
+  //     appBarContext.toggleRight(true)
+  //   }).catch(reason => {
+  //     console.log(`[checkLogin] ${reason}`)
+  //     token.del()
+  //     push('/')
+  //   })
+  // } else if (to.path === '/login' || to.path === '/') {
+  //
+  // } else {
+  //   push('/')
+  // }
 })
 
 

@@ -1,20 +1,24 @@
 <script lang="ts" setup>
 import {useAppBar} from "../compose/useAppBar";
-import {useService} from "../compose/useService";
-import {ref, watch} from "vue";
+import {computed, watch} from "vue";
+import {useGetNameLazyQuery} from "../composable/useService";
 
 const {showRight, toggleRight, onProfile, logout} = useAppBar()
 
-const cli = useService()
 
-const account = ref('account')
+const {result, load, onResult} = useGetNameLazyQuery()
+
+const account = computed(() => result.value?.profile.name)
+
+onResult(param => {
+  if (param.data.profile) {
+    toggleRight(true)
+  }
+})
 
 watch(showRight, (value) => {
   if (value) {
-    cli.profile().then(value => {
-      account.value = value.account
-      toggleRight(true)
-    })
+    load()
   }
 })
 

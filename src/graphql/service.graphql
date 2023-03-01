@@ -1,8 +1,21 @@
-
 mutation login($by:LoginParams!){
     login(by: $by){
         idToken
         accessToken
         expires
+    }
+}
+
+query getProfile{
+    profile {
+        id
+        name
+        email
+    }
+}
+
+query getName{
+    profile {
+        name
     }
 }

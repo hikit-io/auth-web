@@ -28,6 +28,7 @@ const router = createRouter({
 const httpLink = createHttpLink({
     // You should use an absolute URL here
     uri: 'https://api.hikit.io/auth/',
+    credentials: 'include'
 })
 
 // Cache implementation
