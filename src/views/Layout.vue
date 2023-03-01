@@ -22,11 +22,12 @@ const {result, load, onResult, onError} = useGetNameLazyQuery()
 
 onResult(param => {
   if (param.data.profile) {
-
+    appBarContext.toggleRight(true)
   }
 })
 
 onError(param => {
+  token.del()
   push('/')
 })
 
