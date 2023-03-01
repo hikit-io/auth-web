@@ -2,10 +2,11 @@
 import {useRouteQuery} from "@vueuse/router";
 import {onMounted, reactive} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import {useAccessToken} from "../compose/useAccessToken";
 import {EmailLoginParams, GithubLoginParams, LoginParams, useLoginMutation} from "../composable/useService";
+import {useAccessToken} from "../compose/useAccessToken";
 
 const {push} = useRouter()
+const token = useAccessToken()
 
 const code = useRouteQuery('code', '')
 const from = useRouteQuery('from')
@@ -16,8 +17,6 @@ const {path} = useRoute()
 const form = reactive({
   code: code.value,
 })
-
-const token = useAccessToken()
 
 const routeTo = (firstLogin: boolean, from: string) => {
   if (from) {
@@ -53,7 +52,6 @@ const {mutate: login, loading, onError: onLoginError, onDone: onLoginSuccess} = 
 onLoginSuccess(param => {
   console.log(`[onLoginSuccess] ${param.data}`)
   if (param.data) {
-    token.set(param.data.login.idToken)
     routeTo(false, from.value as string)
   }
   console.log(param.errors)

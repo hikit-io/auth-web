@@ -38,22 +38,6 @@ router.beforeResolve((to, from) => {
   }else {
     load()
   }
-  // console.log('[checkLogin]')
-  //
-  // if (token.get()) {
-  //   svc.profile().then(value => {
-  //     console.log(`[checkLogin] ${value}`)
-  //     appBarContext.toggleRight(true)
-  //   }).catch(reason => {
-  //     console.log(`[checkLogin] ${reason}`)
-  //     token.del()
-  //     push('/')
-  //   })
-  // } else if (to.path === '/login' || to.path === '/') {
-  //
-  // } else {
-  //   push('/')
-  // }
 })
 
 
