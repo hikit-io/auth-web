@@ -4,7 +4,7 @@ import Loading from "../components/Loading.vue";
 import Icon from "../components/Icon.vue"
 import {useDeleteAccountMutation, useGetProfileQuery} from "../composable/useService";
 import {Dialog, Snackbar} from "@varlet/ui";
-
+import '@varlet/ui/es/dialog/style'
 
 const {loading, result} = useGetProfileQuery()
 
