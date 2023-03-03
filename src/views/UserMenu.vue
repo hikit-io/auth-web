@@ -1,33 +1,17 @@
 <script lang="ts" setup>
 import {useAppBar} from "../compose/useAppBar";
-import {computed, watch} from "vue";
-import {useGetNameLazyQuery} from "../composable/useService";
+import {useAccessToken} from "../compose/useAccessToken";
 
-const {showRight, toggleRight, onProfile, logout} = useAppBar()
+const {showRight, onProfile, logout} = useAppBar()
 
-
-const {result, load, onResult} = useGetNameLazyQuery()
-
-const account = computed(() => result.value?.profile.name)
-
-onResult(param => {
-  if (param.data.profile) {
-    toggleRight(true)
-  }
-})
-
-watch(showRight, (value) => {
-  if (value) {
-    load()
-  }
-})
+const {name} = useAccessToken()
 
 </script>
 
 <template>
   <var-menu v-if="showRight" placement="bottom" trigger="hover" :same-width="true">
     <var-button text>
-      {{ account }}
+      {{ name }}
       <var-icon name="chevron-down"></var-icon>
     </var-button>
     <template #menu>
