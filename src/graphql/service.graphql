@@ -19,3 +19,9 @@ query getName{
         name
     }
 }
+
+mutation deleteAccount{
+    delete {
+        id
+    }
+}

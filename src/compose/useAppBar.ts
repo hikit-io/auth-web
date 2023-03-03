@@ -24,9 +24,7 @@ const useAppBarProvide = (): AppBarContext => {
     const logout = () => {
         token.del()
         toggleRight(false)
-        push('/').then(r => {
-
-        })
+        push('/').then(r => {})
     }
     const onProfile = () => {
         push('/profile').then(r => {

@@ -5,6 +5,10 @@ schema {
     mutation: Mutation
 }
 
+type DeleteResp {
+    id: String!
+}
+
 type LoginResp {
     accessToken: String!
     expires: Int!
@@ -13,7 +17,7 @@ type LoginResp {
 }
 
 type Mutation {
-    delete: String!
+    delete: DeleteResp!
     login(by: LoginParams!): LoginResp!
 }
 

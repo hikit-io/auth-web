@@ -2,18 +2,42 @@
 import {computed, ref} from "vue";
 import Loading from "../components/Loading.vue";
 import Icon from "../components/Icon.vue"
-import {useGetProfileQuery} from "../composable/useService";
+import {useDeleteAccountMutation, useGetProfileQuery} from "../composable/useService";
+import {Dialog, Snackbar} from "@varlet/ui";
 
 
 const {loading, result} = useGetProfileQuery()
 
 const profile = computed(() => result.value?.profile)
 
+const {mutate: deleteAccount, loading: deleteLoading} = useDeleteAccountMutation()
+
+const actions = {
+  confirm: () => {
+    deleteAccount().then(value => {
+      Snackbar.success("Delete success")
+    }).catch(reason => {
+      Snackbar.error("Delete failed")
+    })
+  },
+  cancel: () => {
+  },
+  close: () => {
+  }
+}
+
+const onDeleteAccount = async () => {
+  actions[await Dialog({
+    message: "After deleting the account, you will not be able to use the .hikit.io website.",
+    title: 'Are you sure?'
+  })]();
+}
+
 </script>
 
 <template>
   <div class="card">
-    <loading v-if="loading" :loading="loading"></loading>
+    <loading v-if="loading||deleteLoading" :loading="loading||deleteLoading"></loading>
     <div v-else>
       <var-space direction="column">
         <h1>Hi, {{ profile?.name }} </h1>
@@ -53,7 +77,7 @@ const profile = computed(() => result.value?.profile)
           <var-button type="primary">
             Change Password
           </var-button>
-          <var-button type="danger">
+          <var-button type="danger" @click="onDeleteAccount">
             Delete Account
           </var-button>
         </var-space>

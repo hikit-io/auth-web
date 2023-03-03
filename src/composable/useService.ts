@@ -95,6 +95,31 @@ export function useGetNameLazyQuery(options: VueApolloComposable.UseQueryOptions
   return VueApolloComposable.useLazyQuery<GetNameQuery, GetNameQueryVariables>(GetNameDocument, {}, options);
 }
 export type GetNameQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetNameQuery, GetNameQueryVariables>;
+export const DeleteAccountDocument = gql`
+    mutation deleteAccount {
+  delete {
+    id
+  }
+}
+    `;
+
+/**
+ * __useDeleteAccountMutation__
+ *
+ * To run a mutation, you first call `useDeleteAccountMutation` within a Vue component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAccountMutation` returns an object that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - Several other properties: https://v4.apollo.vuejs.org/api/use-mutation.html#return
+ *
+ * @param options that will be passed into the mutation, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/mutation.html#options;
+ *
+ * @example
+ * const { mutate, loading, error, onDone } = useDeleteAccountMutation();
+ */
+export function useDeleteAccountMutation(options: VueApolloComposable.UseMutationOptions<DeleteAccountMutation, DeleteAccountMutationVariables> | ReactiveFunction<VueApolloComposable.UseMutationOptions<DeleteAccountMutation, DeleteAccountMutationVariables>> = {}) {
+  return VueApolloComposable.useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(DeleteAccountDocument, options);
+}
+export type DeleteAccountMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteAccountMutation, DeleteAccountMutationVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -102,6 +127,11 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+};
+
+export type DeleteResp = {
+  __typename?: 'DeleteResp';
+  id: Scalars['String'];
 };
 
 export type EmailLoginParams = {
@@ -128,7 +158,7 @@ export type LoginResp = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  delete: Scalars['String'];
+  delete: DeleteResp;
   login: LoginResp;
 };
 
@@ -165,3 +195,8 @@ export type GetNameQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetNameQuery = { __typename?: 'Query', profile: { __typename?: 'Profile', name: string } };
+
+export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DeleteAccountMutation = { __typename?: 'Mutation', delete: { __typename?: 'DeleteResp', id: string } };
