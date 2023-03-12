@@ -27,7 +27,6 @@ const buildRedirectUrl = (url: string): string => {
 }
 
 
-
 const onLogin = () => {
 
 }
@@ -51,12 +50,12 @@ if (token.get()) {
 <template>
   <div style="width: 100%; text-align: -webkit-center;">
     <div class="card">
-      <div v-if="from" style="display: flex;flex-direction: row;align-items: center;">
-      <span style="font-size: 20px;">
-        你将要登录至
-      </span>
+      <var-space v-if="from" :size="'small'">
+        <span style="font-size: 20px;">
+          你将要登录至
+        </span>
         <var-link text-size="20" type="primary" :href="from" target="_blank">{{ from }}</var-link>
-      </div>
+      </var-space>
       <var-form ref="form">
         <var-space direction="column" :size="[14, 0]" :wrap="false">
           <var-row justify="center">
