@@ -26,8 +26,10 @@ const buildRedirectUrl = (url: string): string => {
   return `${url}?method=1`
 }
 
-const onLogin = (val: any) => {
-  console.log(val)
+
+
+const onLogin = () => {
+
 }
 
 const emailSuffix = ref('@hikit.io')
@@ -42,8 +44,6 @@ if (token.get()) {
     path: '/login',
     query: query
   })
-} else {
-  push('/')
 }
 
 </script>
@@ -71,7 +71,7 @@ if (token.get()) {
             </var-col>
           </var-row>
           <var-input v-model="form.password" placeholder="Password" type="password"></var-input>
-          <var-button type="primary" ripple block> Login </var-button>
+          <var-button type="primary" @click="onLogin" ripple block> Login</var-button>
           <var-divider></var-divider>
           <var-button text outline @click="toUrl(buildGithubUrl(buildRedirectUrl('https://auth.hikit.io/login')))"
                       size="normal"

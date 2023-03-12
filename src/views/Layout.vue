@@ -27,15 +27,21 @@ onResult(param => {
 })
 
 onError(param => {
+
   token.del()
-  push('/')
+  const {query} = useRoute()
+
+  push({
+    path: '/',
+    query: query
+  })
 })
 
 
 router.beforeResolve((to, from) => {
-  if (to.path === '/login' || to.path === '/'){
+  if (to.path === '/login' || to.path === '/') {
 
-  }else {
+  } else {
     load()
   }
 })
