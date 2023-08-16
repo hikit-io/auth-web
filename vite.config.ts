@@ -27,7 +27,7 @@ export default defineConfig((env) => {
             })
         ],
         build: {
-            outDir: 'www',
+            outDir: 'docs',
             cssMinify: 'lightningcss',
             rollupOptions: {
                 output: {
