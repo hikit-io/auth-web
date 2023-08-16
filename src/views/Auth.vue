@@ -48,7 +48,7 @@ if (token.get()) {
 </script>
 
 <template>
-  <div style="width: 100%; text-align: -webkit-center;">
+  <div style="width: 100%; text-align: center;">
     <div class="card">
       <var-space v-if="from" :size="'small'">
         <span style="font-size: 20px;">
