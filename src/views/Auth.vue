@@ -88,6 +88,7 @@ if (token.get()) {
 
 <style scoped>
 .card {
+  display: inline-block;
   max-width: 300px;
   padding: 1rem;
   text-align: start;

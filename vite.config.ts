@@ -5,7 +5,6 @@ import autoImport from 'unplugin-auto-import/vite'
 import {VarletUIResolver} from 'unplugin-vue-components/resolvers'
 import {createHtmlPlugin} from 'vite-plugin-html'
 
-
 const INVALID_CHAR_REGEX = /[\x00-\x1F\x7F<>*#"{}|^[\]`;?:&=+$,]/g;
 const DRIVE_LETTER_REGEX = /^[a-z]:/i;
 
@@ -28,7 +27,8 @@ export default defineConfig((env) => {
             })
         ],
         build: {
-            outDir: 'docs',
+            outDir: 'www',
+            cssMinify: 'lightningcss',
             rollupOptions: {
                 output: {
                     sanitizeFileName(fileName) {
@@ -42,5 +42,8 @@ export default defineConfig((env) => {
                 }
             }
         },
+        css: {
+            transformer: 'lightningcss',
+        }
     }
 })

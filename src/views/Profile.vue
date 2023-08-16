@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import {computed, ref} from "vue";
-import Loading from "../components/Loading.vue";
+import {computed} from "vue";
 import Icon from "../components/Icon.vue"
 import {useDeleteAccountMutation, useGetProfileQuery} from "../composable/useService";
 import {Dialog, Snackbar} from "@varlet/ui";
@@ -37,7 +36,7 @@ const onDeleteAccount = async () => {
 
 <template>
   <div class="card">
-    <loading v-if="loading||deleteLoading" :loading="loading||deleteLoading"></loading>
+    <Loading v-if="loading||deleteLoading" :loading="loading||deleteLoading"></Loading>
     <div v-else>
       <var-space direction="column">
         <h1>Hi, {{ profile?.name }} </h1>

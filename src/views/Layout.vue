@@ -21,7 +21,7 @@ const {push} = useRouter()
 const {result, load, onResult, onError} = useGetNameLazyQuery()
 
 onResult(param => {
-  if (param.data.profile) {
+  if (param?.data?.profile) {
     appBarContext.toggleRight(true)
   }
 })
@@ -46,12 +46,15 @@ router.beforeResolve((to, from) => {
   }
 })
 
+const title = import.meta.env.VITE_TITLE
 
 </script>
 
 <template>
   <var-app-bar>
-    HiAuth
+    <router-link to="/" class="title">
+      {{ title }}
+    </router-link>
     <template #right>
       <user-menu></user-menu>
     </template>
@@ -68,5 +71,10 @@ router.beforeResolve((to, from) => {
 .footer {
   width: 100%;
   text-align: center;
+}
+
+.title {
+  color: white;
+  text-decoration: none;
 }
 </style>
