@@ -96,10 +96,11 @@ onMounted(() => {
 
 <style scoped>
 .card {
-  width: 100%;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  width: 100%;
+  min-height: 300px;
 }
 </style>

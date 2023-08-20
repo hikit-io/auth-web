@@ -12,11 +12,12 @@ const props = defineProps<{ loading?: boolean }>()
 
 <style scoped>
 .loading {
-  min-width: 300px;
-  min-height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  min-width: 300px;
+  min-height: 300px;
 }
 </style>
