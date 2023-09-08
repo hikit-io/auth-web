@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import {useAppBar} from "../compose/useAppBar";
-import {useAccessToken} from "../compose/useAccessToken";
+import { useAppBar } from '@/compose/useAppBar'
+import { useAccessToken } from '@/compose/useAccessToken'
 
-const {showRight, onProfile, logout} = useAppBar()
+const { showRight, onProfile, logout } = useAppBar()
 
-const {name} = useAccessToken()
-
+const { name } = useAccessToken()
 </script>
 
 <template>
@@ -21,6 +20,4 @@ const {name} = useAccessToken()
   </var-menu>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
