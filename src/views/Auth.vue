@@ -24,7 +24,7 @@ const buildGithubUrl = (redirectUrl: string): string => {
 }
 const buildRedirectUrl = (url: string, method: 'github' | 'email'): string => {
   if (from.value) {
-    return `${url}?method=${method}%26from=${from.value}`
+    return `${url}?method=${method}${method == 'github' ? '%26' : '&'}from=${from.value}`
   }
   return `${url}?method=${method}`
 }

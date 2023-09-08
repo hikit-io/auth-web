@@ -29,7 +29,6 @@ const genLoginParams = () => {
     } as LoginParams
   }
   const unAndPass = window.atob(code.value).split(':')
-  console.log(unAndPass)
   return {
     email: {
       email: unAndPass[0] ?? '',
