@@ -1,4 +1,4 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
+# This file was generated. Do not edit manually.
 
 schema {
     query: Query
@@ -22,8 +22,11 @@ type Mutation {
 }
 
 type Profile {
+    account: String!
+    avatar: String!
     email: String!
     id: String!
+    isOtp: Boolean!
     name: String!
 }
 
@@ -33,6 +36,7 @@ type Query {
 
 input EmailLoginParams {
     email: String!
+    otp: String
     password: String!
 }
 

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useRouteQuery } from '@vueuse/router'
-import { onMounted, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { EmailLoginParams, GithubLoginParams, LoginParams, useLoginMutation } from '@/composable/useService'
-import { useAccessToken } from '@/compose/useAccessToken'
+import { useAccessToken } from '@/composable/useAccessToken'
 
 const { push } = useRouter()
 const token = useAccessToken()
@@ -99,3 +99,4 @@ onMounted(() => {
   min-height: 300px;
 }
 </style>
+@/composable/useAccessToken

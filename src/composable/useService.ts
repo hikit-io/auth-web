@@ -6,6 +6,8 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type ReactiveFunction<TParam> = () => TParam;
 
 export const LoginDocument = gql`
@@ -95,6 +97,35 @@ export function useGetNameLazyQuery(options: VueApolloComposable.UseQueryOptions
   return VueApolloComposable.useLazyQuery<GetNameQuery, GetNameQueryVariables>(GetNameDocument, {}, options);
 }
 export type GetNameQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetNameQuery, GetNameQueryVariables>;
+export const GetAppBarRightDocument = gql`
+    query getAppBarRight {
+  profile {
+    name
+    account
+    avatar
+  }
+}
+    `;
+
+/**
+ * __useGetAppBarRightQuery__
+ *
+ * To run a query within a Vue component, call `useGetAppBarRightQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAppBarRightQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetAppBarRightQuery();
+ */
+export function useGetAppBarRightQuery(options: VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetAppBarRightQuery, GetAppBarRightQueryVariables>(GetAppBarRightDocument, {}, options);
+}
+export function useGetAppBarRightLazyQuery(options: VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAppBarRightQuery, GetAppBarRightQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetAppBarRightQuery, GetAppBarRightQueryVariables>(GetAppBarRightDocument, {}, options);
+}
+export type GetAppBarRightQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetAppBarRightQuery, GetAppBarRightQueryVariables>;
 export const DeleteAccountDocument = gql`
     mutation deleteAccount {
   delete {
@@ -122,25 +153,26 @@ export function useDeleteAccountMutation(options: VueApolloComposable.UseMutatio
 export type DeleteAccountMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<DeleteAccountMutation, DeleteAccountMutationVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type DeleteResp = {
   __typename?: 'DeleteResp';
-  id: Scalars['String'];
+  id: Scalars['String']['output'];
 };
 
 export type EmailLoginParams = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+  email: Scalars['String']['input'];
+  otp?: InputMaybe<Scalars['String']['input']>;
+  password: Scalars['String']['input'];
 };
 
 export type GithubLoginParams = {
-  code: Scalars['String'];
+  code: Scalars['String']['input'];
 };
 
 export type LoginParams = {
@@ -150,10 +182,10 @@ export type LoginParams = {
 
 export type LoginResp = {
   __typename?: 'LoginResp';
-  accessToken: Scalars['String'];
-  expires: Scalars['Int'];
-  idToken: Scalars['String'];
-  refreshToken: Scalars['String'];
+  accessToken: Scalars['String']['output'];
+  expires: Scalars['Int']['output'];
+  idToken: Scalars['String']['output'];
+  refreshToken: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -169,9 +201,12 @@ export type MutationLoginArgs = {
 
 export type Profile = {
   __typename?: 'Profile';
-  email: Scalars['String'];
-  id: Scalars['String'];
-  name: Scalars['String'];
+  account: Scalars['String']['output'];
+  avatar: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  isOtp: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -195,6 +230,11 @@ export type GetNameQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetNameQuery = { __typename?: 'Query', profile: { __typename?: 'Profile', name: string } };
+
+export type GetAppBarRightQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAppBarRightQuery = { __typename?: 'Query', profile: { __typename?: 'Profile', name: string, account: string, avatar: string } };
 
 export type DeleteAccountMutationVariables = Exact<{ [key: string]: never; }>;
 

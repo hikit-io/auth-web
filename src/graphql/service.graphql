@@ -1,27 +1,35 @@
-mutation login($by:LoginParams!){
-    login(by: $by){
-        idToken
-        accessToken
-        expires
-    }
+mutation login($by: LoginParams!) {
+  login(by: $by) {
+    idToken
+    accessToken
+    expires
+  }
 }
 
-query getProfile{
-    profile {
-        id
-        name
-        email
-    }
+query getProfile {
+  profile {
+    id
+    name
+    email
+  }
 }
 
-query getName{
-    profile {
-        name
-    }
+query getName {
+  profile {
+    name
+  }
 }
 
-mutation deleteAccount{
-    delete {
-        id
-    }
+query getAppBarRight {
+  profile {
+    name
+    account
+    avatar
+  }
+}
+
+mutation deleteAccount {
+  delete {
+    id
+  }
 }

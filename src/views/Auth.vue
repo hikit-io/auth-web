@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { useRouteQuery } from '@vueuse/router'
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAccessToken } from '@/compose/useAccessToken'
-import { useBase64 } from '@vueuse/core'
+import { useAccessToken } from '@/composable/useAccessToken'
 
 const from = useRouteQuery('from', '')
 
@@ -97,3 +96,4 @@ if (token.get()) {
   text-align: start;
 }
 </style>
+@/composable/useAccessToken
