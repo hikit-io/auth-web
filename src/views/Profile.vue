@@ -57,25 +57,25 @@ const onDeleteAccount = async () => {
               <var-icon name="information-outline" :size="30"></var-icon>
             </template>
           </var-cell>
-          <var-cell title="Account" description="nieaowei" border>
+          <var-cell title="Account" :description="profile?.account" border>
             <template #extra>
               <var-icon name="information-outline" :size="30"></var-icon>
             </template>
           </var-cell>
-          <var-cell title="OTP" description="Bind" border>
+          <var-cell title="OTP" :description="profile?.isOtp ? 'Bind' : 'Unbind'" border>
             <template #extra>
               <icon name="qrcode" :size="30"></icon>
             </template>
           </var-cell>
-          <var-cell title="Github" description="nieaowei" border>
+          <var-cell title="Github" :description="profile?.account" border>
             <template #icon>
-              <icon name="github" :size="30"></icon>
+              <icon style="margin: 5px" name="github" :size="30"></icon>
             </template>
           </var-cell>
         </var-list>
         <var-space>
-          <var-button type="primary"> Change Password </var-button>
-          <var-button type="danger" @click="onDeleteAccount"> Delete Account </var-button>
+          <var-button type="primary"> Change Password</var-button>
+          <var-button type="danger" @click="onDeleteAccount"> Delete Account</var-button>
         </var-space>
       </var-space>
     </div>

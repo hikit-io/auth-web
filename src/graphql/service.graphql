@@ -1,35 +1,37 @@
 mutation login($by: LoginParams!) {
-  login(by: $by) {
-    idToken
-    accessToken
-    expires
-  }
+    login(by: $by) {
+        idToken
+        accessToken
+        expires
+    }
 }
 
 query getProfile {
-  profile {
-    id
-    name
-    email
-  }
+    profile {
+        id
+        name
+        email
+        isOtp
+        account
+    }
 }
 
 query getName {
-  profile {
-    name
-  }
+    profile {
+        name
+    }
 }
 
 query getAppBarRight {
-  profile {
-    name
-    account
-    avatar
-  }
+    profile {
+        name
+        account
+        avatar
+    }
 }
 
 mutation deleteAccount {
-  delete {
-    id
-  }
+    delete {
+        id
+    }
 }

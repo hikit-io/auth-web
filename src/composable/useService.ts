@@ -47,6 +47,8 @@ export const GetProfileDocument = gql`
     id
     name
     email
+    isOtp
+    account
   }
 }
     `;
@@ -224,7 +226,7 @@ export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Lo
 export type GetProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'Profile', id: string, name: string, email: string } };
+export type GetProfileQuery = { __typename?: 'Query', profile: { __typename?: 'Profile', id: string, name: string, email: string, isOtp: boolean, account: string } };
 
 export type GetNameQueryVariables = Exact<{ [key: string]: never; }>;
 
