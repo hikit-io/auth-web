@@ -1,6 +1,6 @@
-import useEnv from '@/composable/useEnv'
 import { useCookies } from '@vueuse/integrations/useCookies'
 import { computed, Ref } from 'vue'
+import useEnv from './useEnv'
 
 export interface AccessTokenContext {
   name: Ref<string>
@@ -21,8 +21,9 @@ const useAccessToken = (): AccessTokenContext => {
       path: '/',
       domain: rootDomain,
     })
-    cookies.remove(keyPrefix, {
+    cookies.remove(`${keyPrefix}_NAME`, {
       path: '/',
+      domain: rootDomain,
     })
   }
   const name = computed(() => cookies.get<string>(`${keyPrefix}_NAME`))
