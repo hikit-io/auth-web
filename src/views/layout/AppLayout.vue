@@ -36,7 +36,8 @@ onError((param) => {
 })
 
 router.beforeResolve((to, from) => {
-  if (ignoreCheckPaths.findIndex((value: string) => value === to.path) != -1) {
+  if (to.path === '/login' || to.path === '/') {
+    console.log(1213)
   } else {
     load()
   }
