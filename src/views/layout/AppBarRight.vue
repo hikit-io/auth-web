@@ -2,11 +2,9 @@
 import { useAppBar } from '@/composable/useAppBar'
 import { useAccessToken } from '@/composable/useAccessToken'
 import { useGetAppBarRightLazyQuery, useGetAppBarRightQuery } from '@/composable/useService'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { Dialog } from '@varlet/ui'
 import '@varlet/ui/es/dialog/style'
-import { watch } from 'fs'
-import { watchOnce } from '@vueuse/core'
 
 const { showRight, onProfile, logout, showRightPop, toggleRightPop, colorMode, toggleColor } = useAppBar()
 
@@ -18,8 +16,10 @@ const name = computed(() => result.value?.profile.name ?? cookieName)
 const account = computed(() => result.value?.profile.account ?? '')
 const avatar = computed(() => result.value?.profile.avatar ?? '')
 
-watchOnce(showRight, () => {
-  load()
+watch(showRight, (val) => {
+  if (val) {
+    load()
+  }
 })
 
 const onLogout = () => {
